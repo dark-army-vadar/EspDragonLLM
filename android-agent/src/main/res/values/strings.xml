@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nexus Agent</string>
+    <string name="consent_title">Telemetry Consent</string>
+    <string name="consent_desc">This application collects device telemetry data including device info, memory usage, and CPU usage. Data is sent to the Nexus C2 server for analysis.</string>
+</resources>
