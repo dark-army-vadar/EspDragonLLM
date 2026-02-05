@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Cyberpunk Palette - HSL */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+
+  --card: 240 10% 6%; /* Slightly lighter than bg */
+  --card-foreground: 0 0% 98%;
+
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+
+  --primary: 142 70% 50%; /* Neon Green */
+  --primary-foreground: 144 100% 10%;
+
+  --secondary: 217 91% 60%; /* Neon Blue */
+  --secondary-foreground: 210 40% 98%;
+
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+
+  --accent: 240 4% 16%;
+  --accent-foreground: 0 0% 98%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 240 4% 25%;
+  --input: 240 4% 20%;
+  --ring: 142 70% 50%; /* Green ring */
+
+  --radius: 0.25rem;
+  
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Orbitron', sans-serif;
+  --font-ui: 'Rajdhani', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-ui);
+    background-image: 
+      linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+      linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    overflow-x: hidden;
+  }
+  
+  /* Scanline effect overlay */
+  body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 50;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-wide uppercase;
+  }
+
+  pre, code, .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .cyber-card {
+    @apply bg-card border border-border relative overflow-hidden transition-all duration-300;
+  }
+  
+  .cyber-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-primary opacity-50;
+  }
+  
+  .cyber-card::after {
+    content: '';
+    @apply absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary opacity-50;
+  }
+  
+  .cyber-button {
+    @apply px-4 py-2 font-mono font-bold uppercase tracking-wider transition-all duration-200
+           border border-primary text-primary hover:bg-primary hover:text-black hover:shadow-[0_0_15px_rgba(0,255,65,0.5)]
+           active:translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:bg-transparent disabled:hover:text-primary;
+  }
+
+  .cyber-button-destructive {
+    @apply px-4 py-2 font-mono font-bold uppercase tracking-wider transition-all duration-200
+           border border-destructive text-destructive hover:bg-destructive hover:text-white hover:shadow-[0_0_15px_rgba(255,0,0,0.5)]
+           active:translate-y-0.5;
+  }
+
+  .cyber-input {
+    @apply bg-black/50 border border-border text-foreground px-4 py-2 font-mono focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/50 placeholder:text-muted-foreground/50;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+  
+  .border-glow {
+    box-shadow: 0 0 10px -2px currentColor;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border hover:bg-primary/50 transition-colors;
+}
